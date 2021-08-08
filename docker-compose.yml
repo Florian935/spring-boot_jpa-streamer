@@ -11,8 +11,8 @@ services:
     restart: always
     container_name: database
     environment:
-      MYSQL_DATABASE: dockerizeddb
-      MYSQL_USER: root
+      MYSQL_DATABASE: jpa_streamer_demo
+      MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: root
     volumes:
