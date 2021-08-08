@@ -17,8 +17,6 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - data-db:/var/lib/mysql
-    networks:
-      - backend
 
   # phpmyadmin panel
   phpmyadmin:
@@ -26,8 +24,6 @@ services:
     depends_on:
       - database
     restart: always
-    networks:
-      - backend
     environment:
       PMA_HOST: database
     ports:
