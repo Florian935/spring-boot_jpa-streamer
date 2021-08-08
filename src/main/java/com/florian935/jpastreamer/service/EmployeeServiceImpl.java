@@ -39,4 +39,16 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .filter(Employee$.name.equal(name))
                 .toList();
     }
+
+    @Override
+    public List<Employee> getAllEmployeesByNameAndSalary(String name, double salary) {
+
+        return jpaStreamer.stream(Employee.class)
+                .filter(Employee$
+                        .name.equal(name)
+                        .and(Employee$.salary.greaterThan(salary)))
+                .toList();
+    }
+
+
 }

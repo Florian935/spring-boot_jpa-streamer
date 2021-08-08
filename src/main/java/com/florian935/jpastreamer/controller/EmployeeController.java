@@ -41,4 +41,13 @@ public class EmployeeController {
 
         return employeeService.getAllEmployeesByName(name);
     }
+
+    @GetMapping(path = "/by-name/greater-salary", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(OK)
+    List<Employee> getEmployeesByNameAndGreaterSalary(
+            @RequestParam String name,
+            @RequestParam double salary) {
+
+        return employeeService.getAllEmployeesByNameAndSalary(name, salary);
+    }
 }
