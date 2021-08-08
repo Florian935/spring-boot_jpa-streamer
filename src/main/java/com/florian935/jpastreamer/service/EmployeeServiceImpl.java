@@ -1,6 +1,7 @@
 package com.florian935.jpastreamer.service;
 
 import com.florian935.jpastreamer.domain.Employee;
+import com.florian935.jpastreamer.domain.Employee$;
 import com.florian935.jpastreamer.repository.EmployeeRepository;
 import com.speedment.jpastreamer.application.JPAStreamer;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +30,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee saveEmployee(Employee employee) {
 
         return employeeRepository.save(employee);
+    }
+
+    @Override
+    public List<Employee> getAllEmployeesByName(String name) {
+
+        return jpaStreamer.stream(Employee.class)
+                .filter(Employee$.name.equal(name))
+                .toList();
     }
 }

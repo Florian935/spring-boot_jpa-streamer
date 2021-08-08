@@ -34,4 +34,11 @@ public class EmployeeController {
 
         return employeeService.saveEmployee(employee);
     }
+
+    @GetMapping(path = "/by-name", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(OK)
+    List<Employee> getEmployeesByName(@RequestParam String name) {
+
+        return employeeService.getAllEmployeesByName(name);
+    }
 }
