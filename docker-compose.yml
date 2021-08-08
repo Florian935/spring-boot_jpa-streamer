@@ -1,0 +1,38 @@
+version: '3.8'
+
+# Define services
+services:
+
+  # Database Service (Mysql)
+  database:
+    image: mysql:8.0
+    ports:
+      - '3306:3306'
+    restart: always
+    container_name: database
+    environment:
+      MYSQL_DATABASE: dockerizeddb
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - data-db:/var/lib/mysql
+    networks:
+      - backend
+
+  # phpmyadmin panel
+  phpmyadmin:
+    image: phpmyadmin
+    depends_on:
+      - database
+    restart: always
+    networks:
+      - backend
+    environment:
+      PMA_HOST: database
+    ports:
+      - '8090:80'
+
+# Volumes
+volumes:
+  data-db:
