@@ -13,4 +13,6 @@ public interface EmployeeService {
     List<Employee> getAllEmployeesByName(String name);
 
     List<Employee> getAllEmployeesByNameAndSalary(String name, double salary);
+
+    List<Employee> getEmployeesBySalaryRange(double minSalary, double maxSalary);
 }

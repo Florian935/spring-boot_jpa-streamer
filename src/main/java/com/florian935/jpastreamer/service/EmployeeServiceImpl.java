@@ -50,5 +50,13 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .toList();
     }
 
+    @Override
+    public List<Employee> getEmployeesBySalaryRange(double minSalary, double maxSalary) {
+
+        return jpaStreamer.stream(Employee.class)
+                .filter(Employee$.salary.between(minSalary, maxSalary))
+                .toList();
+    }
+
 
 }

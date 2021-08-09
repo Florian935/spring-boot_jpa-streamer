@@ -50,4 +50,13 @@ public class EmployeeController {
 
         return employeeService.getAllEmployeesByNameAndSalary(name, salary);
     }
+
+    @GetMapping(path = "/salary", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(OK)
+    List<Employee> getEmployeesBySalaryRange(
+            @RequestParam double minSalary,
+            @RequestParam double maxSalary) {
+
+        return employeeService.getEmployeesBySalaryRange(minSalary, maxSalary);
+    }
 }
