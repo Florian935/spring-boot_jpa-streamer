@@ -33,6 +33,24 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    @SneakyThrows
+    public Employee getEmployeeById(Integer id) {
+
+        if (!isEmployeeExist(id)) {
+            throw new Exception("This employee doesn't exist !");
+        }
+
+        return employeeRepository.findById(id).get();
+    }
+
+    private boolean isEmployeeExist(Integer id) {
+
+        final Optional<Employee> perhapsEmployee = employeeRepository.findById(id);
+
+        return perhapsEmployee.isPresent();
+    }
+
+    @Override
     public Employee saveEmployee(Employee employee) {
 
         return save(employee);
@@ -42,19 +60,29 @@ public class EmployeeServiceImpl implements EmployeeService {
     @SneakyThrows
     public Employee updateEmployee(Integer id, Employee employee) {
 
-        Optional<Employee> perhapsEmployee = employeeRepository.findById(id);
-
-        if (perhapsEmployee.isEmpty()) {
+        if (!isEmployeeExist(id)) {
             throw new Exception("This employee doesn't exist !");
         }
 
         employee.setId(id);
+
         return save(employee);
     }
 
     private Employee save(Employee employee) {
 
         return employeeRepository.save(employee);
+    }
+
+    @Override
+    @SneakyThrows
+    public void deleteById(Integer id) {
+
+        if (!isEmployeeExist(id)) {
+            throw new Exception("This employee doesn't exist !");
+        }
+
+        employeeRepository.deleteById(id);
     }
 
     @Override

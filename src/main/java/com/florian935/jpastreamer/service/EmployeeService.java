@@ -9,9 +9,13 @@ public interface EmployeeService {
 
     List<Employee> getAllEmployees();
 
+    Employee getEmployeeById(Integer id);
+
     Employee saveEmployee(Employee employee);
 
     Employee updateEmployee(Integer id, Employee employee);
+
+    void deleteById(Integer id);
 
     List<Employee> getAllEmployeesByName(String name);
 

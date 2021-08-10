@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import static lombok.AccessLevel.PRIVATE;
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -30,6 +29,13 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
+    @GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(OK)
+    Employee getEmployeeById(@PathVariable Integer id) {
+
+        return employeeService.getEmployeeById(id);
+    }
+
     @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(CREATED)
     Employee saveEmployee(@RequestBody Employee employee) {
@@ -37,11 +43,21 @@ public class EmployeeController {
         return employeeService.saveEmployee(employee);
     }
 
-    @PutMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
+    @PutMapping(
+            path = "/{id}",
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(CREATED)
     Employee updateEmployee(@PathVariable Integer id, @RequestBody Employee employee) {
 
         return employeeService.updateEmployee(id, employee);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(NO_CONTENT)
+    void deleteById(@PathVariable Integer id) {
+
+        employeeService.deleteById(id);
     }
 
     @GetMapping(path = "/by-name", produces = APPLICATION_JSON_VALUE)
