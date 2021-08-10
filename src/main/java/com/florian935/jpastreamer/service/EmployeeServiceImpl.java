@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
@@ -33,6 +34,25 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee saveEmployee(Employee employee) {
+
+        return save(employee);
+    }
+
+    @Override
+    @SneakyThrows
+    public Employee updateEmployee(Integer id, Employee employee) {
+
+        Optional<Employee> perhapsEmployee = employeeRepository.findById(id);
+
+        if (perhapsEmployee.isEmpty()) {
+            throw new Exception("This employee doesn't exist !");
+        }
+
+        employee.setId(id);
+        return save(employee);
+    }
+
+    private Employee save(Employee employee) {
 
         return employeeRepository.save(employee);
     }

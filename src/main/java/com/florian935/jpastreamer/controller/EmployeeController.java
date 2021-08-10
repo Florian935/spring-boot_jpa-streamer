@@ -37,6 +37,13 @@ public class EmployeeController {
         return employeeService.saveEmployee(employee);
     }
 
+    @PutMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(CREATED)
+    Employee updateEmployee(@PathVariable Integer id, @RequestBody Employee employee) {
+
+        return employeeService.updateEmployee(id, employee);
+    }
+
     @GetMapping(path = "/by-name", produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(OK)
     List<Employee> getEmployeesByName(@RequestParam String name) {
