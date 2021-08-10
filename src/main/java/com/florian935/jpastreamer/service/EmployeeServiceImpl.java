@@ -5,11 +5,16 @@ import com.florian935.jpastreamer.domain.Employee$;
 import com.florian935.jpastreamer.repository.EmployeeRepository;
 import com.speedment.jpastreamer.application.JPAStreamer;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.groupingBy;
 import static lombok.AccessLevel.PRIVATE;
 
 @Service
@@ -56,6 +61,30 @@ public class EmployeeServiceImpl implements EmployeeService {
         return jpaStreamer.stream(Employee.class)
                 .filter(Employee$.salary.between(minSalary, maxSalary))
                 .toList();
+    }
+
+    @Override
+    @SneakyThrows
+    public Employee getEmployeeWithLessSalary() {
+
+        return jpaStreamer.stream(Employee.class)
+                .min(Comparator.comparing(Employee::getSalary))
+                .orElseThrow(() -> new Exception("No employee in database."));
+    }
+
+    @Override
+    public List<Employee> getEmployeesByIds(List<Integer> ids) {
+
+        return jpaStreamer.stream(Employee.class)
+                .filter(Employee$.id.in(ids))
+                .toList();
+    }
+
+    @Override
+    public Map<String, List<Employee>> getEmployeeGroupByDepartment() {
+
+        return jpaStreamer.stream(Employee.class)
+                .collect(groupingBy(Employee::getDepartment));
     }
 
 
