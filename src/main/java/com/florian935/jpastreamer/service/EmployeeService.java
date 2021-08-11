@@ -32,4 +32,6 @@ public interface EmployeeService {
     List<Employee> getEmployeesByPage(long pageNumber, long pageSize);
 
     List<Employee> getEmployeesSortedByName();
+
+    List<Employee> getEmployeesSortedByNameThenSalary();
 }

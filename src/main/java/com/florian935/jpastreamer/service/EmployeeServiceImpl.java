@@ -150,4 +150,13 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .sorted(Employee$.name)
                 .toList();
     }
+
+    @Override
+    public List<Employee> getEmployeesSortedByNameThenSalary() {
+
+        return jpaStreamer.stream(Employee.class)
+                .sorted(Employee$.name)
+                .sorted(Employee$.salary)
+                .toList();
+    }
 }

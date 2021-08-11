@@ -120,10 +120,17 @@ public class EmployeeController {
         return employeeService.getEmployeesByPage(pageNumber, pageSize);
     }
 
-    @GetMapping(path= "sort-by-name", produces = APPLICATION_JSON_VALUE)
+    @GetMapping(path = "sort-by-name", produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(OK)
     List<Employee> getEmployeesSortedByName() {
 
         return employeeService.getEmployeesSortedByName();
+    }
+
+    @GetMapping(path = "sort-by-name-then-salary", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(OK)
+    List<Employee> getEmployeesSortedByNameThenSalary() {
+
+        return employeeService.getEmployeesSortedByNameThenSalary();
     }
 }
