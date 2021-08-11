@@ -111,4 +111,12 @@ public class EmployeeController {
         return employeeService.getEmployeeGroupByDepartment();
     }
 
+    @GetMapping(path = "/pages", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(OK)
+    List<Employee> getEmployeeByPage(
+            @RequestParam long pageNumber,
+            @RequestParam long pageSize) {
+
+        return employeeService.getEmployeeByPage(pageNumber, pageSize);
+    }
 }

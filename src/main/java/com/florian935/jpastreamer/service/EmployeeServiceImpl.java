@@ -9,11 +9,11 @@ import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.groupingBy;
 import static lombok.AccessLevel.PRIVATE;
 
@@ -35,18 +35,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     @SneakyThrows
     public Employee getEmployeeById(Integer id) {
 
-        if (!isEmployeeExist(id)) {
+        if (employeeNotExist(id)) {
             throw new Exception("This employee doesn't exist !");
         }
 
         return employeeRepository.findById(id).get();
     }
 
-    private boolean isEmployeeExist(Integer id) {
+    private boolean employeeNotExist(Integer id) {
 
         final Optional<Employee> perhapsEmployee = employeeRepository.findById(id);
 
-        return perhapsEmployee.isPresent();
+        return perhapsEmployee.isEmpty();
     }
 
     @Override
@@ -59,7 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @SneakyThrows
     public Employee updateEmployee(Integer id, Employee employee) {
 
-        if (!isEmployeeExist(id)) {
+        if (employeeNotExist(id)) {
             throw new Exception("This employee doesn't exist !");
         }
 
@@ -77,7 +77,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @SneakyThrows
     public void deleteById(Integer id) {
 
-        if (!isEmployeeExist(id)) {
+        if (employeeNotExist(id)) {
             throw new Exception("This employee doesn't exist !");
         }
 
@@ -115,7 +115,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee getEmployeeWithLessSalary() {
 
         return jpaStreamer.stream(Employee.class)
-                .min(Comparator.comparing(Employee::getSalary))
+                .min(comparing(Employee::getSalary))
                 .orElseThrow(() -> new Exception("No employee in database."));
     }
 
@@ -134,5 +134,12 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .collect(groupingBy(Employee::getDepartment));
     }
 
+    @Override
+    public List<Employee> getEmployeeByPage(long pageNumber, long pageSize) {
 
+        return jpaStreamer.stream(Employee.class)
+                .skip((pageNumber - 1) * pageSize)
+                .limit(pageSize)
+                .toList();
+    }
 }

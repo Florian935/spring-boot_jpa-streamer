@@ -28,4 +28,6 @@ public interface EmployeeService {
     List<Employee> getEmployeesByIds(List<Integer> ids);
 
     Map<String, List<Employee>> getEmployeeGroupByDepartment();
+
+    List<Employee> getEmployeeByPage(long pageNumber, long pageSize);
 }
