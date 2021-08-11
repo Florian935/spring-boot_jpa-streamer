@@ -1,6 +1,7 @@
 package com.florian935.jpastreamer.controller;
 
 import com.florian935.jpastreamer.domain.Employee;
+import com.florian935.jpastreamer.domain.Job;
 import com.florian935.jpastreamer.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

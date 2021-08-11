@@ -11,32 +11,27 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PRIVATE;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "language")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = PRIVATE)
 @Builder
-public class Employee {
+public class Language {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "employee_id")
-    Integer employeeId;
+    @Column(name = "language_id")
+    Integer languageId;
 
     @Column(name = "name")
     String name;
 
-    @Column(name = "department")
-    private String department;
-
-    @Column(name = "salary")
-    private double salary;
-
-    @ManyToMany(mappedBy = "employees")
+    @OneToMany(mappedBy = "language", fetch = EAGER)
     List<Job> jobs = new ArrayList<>();
 }

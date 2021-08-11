@@ -1,6 +1,7 @@
 package com.florian935.jpastreamer.service;
 
 import com.florian935.jpastreamer.domain.Employee;
+import com.florian935.jpastreamer.domain.Job;
 
 import java.util.List;
 import java.util.Map;

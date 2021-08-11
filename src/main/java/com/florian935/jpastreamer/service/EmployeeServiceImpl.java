@@ -2,8 +2,10 @@ package com.florian935.jpastreamer.service;
 
 import com.florian935.jpastreamer.domain.Employee;
 import com.florian935.jpastreamer.domain.Employee$;
+import com.florian935.jpastreamer.domain.Job;
 import com.florian935.jpastreamer.repository.EmployeeRepository;
 import com.speedment.jpastreamer.application.JPAStreamer;
+import com.speedment.jpastreamer.streamconfiguration.StreamConfiguration;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
@@ -12,9 +14,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 
+import static com.speedment.jpastreamer.streamconfiguration.StreamConfiguration.of;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toMap;
 import static lombok.AccessLevel.PRIVATE;
 
 @Service
@@ -63,7 +68,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new Exception("This employee doesn't exist !");
         }
 
-        employee.setId(id);
+        employee.setEmployeeId(id);
 
         return save(employee);
     }
@@ -123,7 +128,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> getEmployeesByIds(List<Integer> ids) {
 
         return jpaStreamer.stream(Employee.class)
-                .filter(Employee$.id.in(ids))
+                .filter(Employee$.employeeId.in(ids))
                 .toList();
     }
 
