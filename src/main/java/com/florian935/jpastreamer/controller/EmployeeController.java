@@ -108,7 +108,7 @@ public class EmployeeController {
     @ResponseStatus(OK)
     Map<String, List<Employee>> getEmployeeGroupByDepartment() {
 
-        return employeeService.getEmployeeGroupByDepartment();
+        return employeeService.getEmployeesGroupByDepartment();
     }
 
     @GetMapping(path = "/pages", produces = APPLICATION_JSON_VALUE)
@@ -117,6 +117,13 @@ public class EmployeeController {
             @RequestParam long pageNumber,
             @RequestParam long pageSize) {
 
-        return employeeService.getEmployeeByPage(pageNumber, pageSize);
+        return employeeService.getEmployeesByPage(pageNumber, pageSize);
+    }
+
+    @GetMapping(path= "sort-by-name", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(OK)
+    List<Employee> getEmployeesSortedByName() {
+
+        return employeeService.getEmployeesSortedByName();
     }
 }

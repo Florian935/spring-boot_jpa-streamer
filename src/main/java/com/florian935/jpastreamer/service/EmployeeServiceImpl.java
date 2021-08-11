@@ -128,18 +128,26 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Map<String, List<Employee>> getEmployeeGroupByDepartment() {
+    public Map<String, List<Employee>> getEmployeesGroupByDepartment() {
 
         return jpaStreamer.stream(Employee.class)
                 .collect(groupingBy(Employee::getDepartment));
     }
 
     @Override
-    public List<Employee> getEmployeeByPage(long pageNumber, long pageSize) {
+    public List<Employee> getEmployeesByPage(long pageNumber, long pageSize) {
 
         return jpaStreamer.stream(Employee.class)
                 .skip((pageNumber - 1) * pageSize)
                 .limit(pageSize)
+                .toList();
+    }
+
+    @Override
+    public List<Employee> getEmployeesSortedByName() {
+
+        return jpaStreamer.stream(Employee.class)
+                .sorted(Employee$.name)
                 .toList();
     }
 }

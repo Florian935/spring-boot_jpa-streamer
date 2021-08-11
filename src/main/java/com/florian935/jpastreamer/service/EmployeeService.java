@@ -27,7 +27,9 @@ public interface EmployeeService {
 
     List<Employee> getEmployeesByIds(List<Integer> ids);
 
-    Map<String, List<Employee>> getEmployeeGroupByDepartment();
+    Map<String, List<Employee>> getEmployeesGroupByDepartment();
 
-    List<Employee> getEmployeeByPage(long pageNumber, long pageSize);
+    List<Employee> getEmployeesByPage(long pageNumber, long pageSize);
+
+    List<Employee> getEmployeesSortedByName();
 }
