@@ -168,9 +168,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Map<SimpleEmployeeDto, List<PetDto>> getPetsOfEmployees() {
 
         return jpaStreamer
-                .stream(of(Employee.class).joining(Employee$.pets))
-                .collect(
-                        toMap(
+                .stream(Employee.class)
+                .collect(toMap(
                                 SimpleEmployeeDto::new,
                                 employee -> employee.getPets()
                                         .stream()
@@ -184,12 +183,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Map<SimpleEmployeeDto, List<SimpleLanguageDto>> getLanguagesOfEmployees() {
 
         return jpaStreamer
-                .stream(of(Employee.class).joining(Employee$.languages))
-                .collect(
-                        toMap(
+                .stream(Employee.class)
+                .collect(toMap(
                                 SimpleEmployeeDto::new,
-                                employee -> employee
-                                        .getLanguages()
+                                employee -> employee.getLanguages()
                                         .stream()
                                         .map(SimpleLanguageDto::new)
                                         .toList()

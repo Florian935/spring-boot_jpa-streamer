@@ -65,9 +65,8 @@ public class LanguageServiceImpl implements LanguageService {
     @Override
     public Map<SimpleLanguageDto, List<SimpleEmployeeDto>> getEmployeesPerLanguages() {
 
-        return jpaStreamer.stream(of(Language.class).joining(Language$.employees))
-                .collect(
-                        toMap(
+        return jpaStreamer.stream(Language.class)
+                .collect(toMap(
                                 SimpleLanguageDto::new,
                                 language -> language.getEmployees()
                                         .stream()
