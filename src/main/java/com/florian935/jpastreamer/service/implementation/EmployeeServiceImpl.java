@@ -1,11 +1,9 @@
 package com.florian935.jpastreamer.service.implementation;
 
-import com.florian935.jpastreamer.domain.Employee;
-import com.florian935.jpastreamer.domain.Employee$;
-import com.florian935.jpastreamer.domain.Job;
-import com.florian935.jpastreamer.domain.Pet;
+import com.florian935.jpastreamer.domain.*;
 import com.florian935.jpastreamer.dto.EmployeeDto;
 import com.florian935.jpastreamer.dto.PetDto;
+import com.florian935.jpastreamer.dto.SimpleLanguageDto;
 import com.florian935.jpastreamer.repository.EmployeeRepository;
 import com.florian935.jpastreamer.service.CrudService;
 import com.florian935.jpastreamer.service.EmployeeService;
@@ -170,7 +168,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Map<EmployeeDto, List<PetDto>> getPetsGroupByEmployeeIdAndName() {
+    public Map<EmployeeDto, List<PetDto>> getPetsOfEmployees() {
 
         return jpaStreamer
                 .stream(of(Employee.class).joining(Employee$.pets))
@@ -180,7 +178,25 @@ public class EmployeeServiceImpl implements EmployeeService {
                                 employee -> employee.getPets()
                                         .stream()
                                         .map(PetDto::new)
-                                        .toList())
+                                        .toList()
+                        )
+                );
+    }
+
+    @Override
+    public Map<EmployeeDto, List<SimpleLanguageDto>> getLanguagesOfEmployees() {
+
+        return jpaStreamer
+                .stream(of(Employee.class).joining(Employee$.languages))
+                .collect(
+                        toMap(
+                                EmployeeDto::new,
+                                employee -> employee
+                                        .getLanguages()
+                                        .stream()
+                                        .map(SimpleLanguageDto::new)
+                                        .toList()
+                        )
                 );
     }
 }

@@ -3,6 +3,7 @@ package com.florian935.jpastreamer.dto;
 import com.florian935.jpastreamer.domain.Employee;
 import com.florian935.jpastreamer.domain.Language;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -15,6 +16,7 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = PRIVATE)
+@Builder
 public class LanguageDto {
 
     Integer languageId;

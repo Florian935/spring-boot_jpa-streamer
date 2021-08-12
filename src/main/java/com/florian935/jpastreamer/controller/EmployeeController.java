@@ -1,9 +1,10 @@
 package com.florian935.jpastreamer.controller;
 
 import com.florian935.jpastreamer.domain.Employee;
-import com.florian935.jpastreamer.domain.Pet;
+import com.florian935.jpastreamer.domain.Language;
 import com.florian935.jpastreamer.dto.EmployeeDto;
 import com.florian935.jpastreamer.dto.PetDto;
+import com.florian935.jpastreamer.dto.SimpleLanguageDto;
 import com.florian935.jpastreamer.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -137,10 +138,17 @@ public class EmployeeController {
         return employeeService.getEmployeesSortedByNameThenSalary();
     }
 
-    @GetMapping(path = "/name/group-by-pets", produces = APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/pets", produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(OK)
-    Map<EmployeeDto, List<PetDto>> getPetsGroupByEmployeeIdAndName() {
+    Map<EmployeeDto, List<PetDto>> getPetsOfEmployees() {
 
-        return employeeService.getPetsGroupByEmployeeIdAndName();
+        return employeeService.getPetsOfEmployees();
+    }
+
+    @GetMapping(path = "/languages", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(OK)
+    Map<EmployeeDto, List<SimpleLanguageDto>> getLanguagesOfEmployees() {
+
+        return employeeService.getLanguagesOfEmployees();
     }
 }

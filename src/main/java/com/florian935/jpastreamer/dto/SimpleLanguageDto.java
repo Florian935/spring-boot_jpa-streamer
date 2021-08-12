@@ -1,6 +1,6 @@
 package com.florian935.jpastreamer.dto;
 
-import com.florian935.jpastreamer.domain.Employee;
+import com.florian935.jpastreamer.domain.Language;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,15 +12,16 @@ import static lombok.AccessLevel.PRIVATE;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldDefaults(level = PRIVATE)
 @Builder
-public class EmployeeDto {
+@FieldDefaults(level = PRIVATE)
+public class SimpleLanguageDto {
 
-    Integer employeeId;
+    Integer languageId;
     String name;
 
-    public EmployeeDto(Employee employee) {
-        this.employeeId = employee.getEmployeeId();
-        this.name = employee.getName();
+    public SimpleLanguageDto(Language language) {
+
+        this.languageId = language.getLanguageId();
+        this.name = language.getName();
     }
 }

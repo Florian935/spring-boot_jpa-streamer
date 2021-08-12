@@ -12,6 +12,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PRIVATE;
 
@@ -38,7 +39,7 @@ public class Employee {
     @Column(name = "salary")
     double salary;
 
-    @OneToMany(targetEntity = Pet.class, mappedBy = "employee")
+    @OneToMany(targetEntity = Pet.class, mappedBy = "employee", fetch = EAGER)
     @JsonIgnoreProperties("employee")
     List<Pet> pets = new ArrayList<>();
 
