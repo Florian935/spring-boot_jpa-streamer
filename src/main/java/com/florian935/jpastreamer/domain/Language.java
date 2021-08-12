@@ -8,10 +8,6 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PRIVATE;
 
@@ -31,7 +27,4 @@ public class Language {
 
     @Column(name = "name")
     String name;
-
-    @OneToMany(mappedBy = "language", fetch = EAGER)
-    List<Job> jobs = new ArrayList<>();
 }

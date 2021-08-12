@@ -12,18 +12,18 @@ import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PRIVATE;
 
 @Entity
-@Table(name = "job")
+@Table(name = "pet")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
 @FieldDefaults(level = PRIVATE)
-public class Job {
+public class Pet {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "job_id")
-    Integer jobId;
+    @Column(name = "pet_id")
+    Integer petId;
 
     @Column(name = "name")
     String name;

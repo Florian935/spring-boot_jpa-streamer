@@ -2,6 +2,8 @@ package com.florian935.jpastreamer.service;
 
 import com.florian935.jpastreamer.domain.Employee;
 import com.florian935.jpastreamer.domain.Job;
+import com.florian935.jpastreamer.domain.Pet;
+import com.florian935.jpastreamer.dto.EmployeeDto;
 
 import java.util.List;
 import java.util.Map;
@@ -35,4 +37,8 @@ public interface EmployeeService {
     List<Employee> getEmployeesSortedByName();
 
     List<Employee> getEmployeesSortedByNameThenSalary();
+
+    Map<Employee, List<Pet>> getPetsGroupByEmployee();
+
+    Map<EmployeeDto, List<Pet>> getPetsGroupByEmployeeIdAndName();
 }

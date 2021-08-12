@@ -1,7 +1,8 @@
 package com.florian935.jpastreamer.controller;
 
 import com.florian935.jpastreamer.domain.Employee;
-import com.florian935.jpastreamer.domain.Job;
+import com.florian935.jpastreamer.domain.Pet;
+import com.florian935.jpastreamer.dto.EmployeeDto;
 import com.florian935.jpastreamer.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -133,5 +134,19 @@ public class EmployeeController {
     List<Employee> getEmployeesSortedByNameThenSalary() {
 
         return employeeService.getEmployeesSortedByNameThenSalary();
+    }
+
+    @GetMapping(path = "group-by-pets", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(OK)
+    Map<Employee, List<Pet>> getPetsGroupByDepartment() {
+
+        return employeeService.getPetsGroupByEmployee();
+    }
+
+    @GetMapping(path = "/name/group-by-pets", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(OK)
+    Map<EmployeeDto, List<Pet>> getPetsGroupByEmployeeIdAndName() {
+
+        return employeeService.getPetsGroupByEmployeeIdAndName();
     }
 }

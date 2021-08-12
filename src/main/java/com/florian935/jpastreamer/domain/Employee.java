@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PRIVATE;
 
@@ -37,6 +38,11 @@ public class Employee {
     @Column(name = "salary")
     private double salary;
 
-    @ManyToMany(mappedBy = "employees")
-    List<Job> jobs = new ArrayList<>();
+    @OneToMany(
+            cascade = ALL,
+            orphanRemoval = true,
+            fetch = EAGER
+    )
+    @JoinColumn(name = "employee_id")
+    List<Pet> pets = new ArrayList<>();
 }
