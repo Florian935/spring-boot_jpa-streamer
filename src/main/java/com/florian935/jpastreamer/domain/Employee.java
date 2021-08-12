@@ -38,7 +38,7 @@ public class Employee {
     @Column(name = "salary")
     double salary;
 
-    @OneToMany(targetEntity = Pet.class, mappedBy = "employee", fetch = EAGER)
+    @OneToMany(targetEntity = Pet.class, mappedBy = "employee")
     @JsonIgnoreProperties("employee")
     List<Pet> pets = new ArrayList<>();
 
@@ -57,4 +57,12 @@ public class Employee {
     @OneToOne
     @JoinColumn(name = "address_id", insertable = false, updatable = false)
     Address address;
+
+    @Column(name = "job_id")
+    Integer jobId;
+
+    @ManyToOne(targetEntity = Job.class)
+    @JoinColumn(name = "job_id", insertable = false, updatable = false)
+    @JsonIgnoreProperties("employees")
+    Job job;
 }

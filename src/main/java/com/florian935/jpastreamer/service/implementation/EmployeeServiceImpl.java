@@ -1,13 +1,15 @@
 package com.florian935.jpastreamer.service.implementation;
 
-import com.florian935.jpastreamer.domain.*;
-import com.florian935.jpastreamer.dto.SimpleEmployeeDto;
+import com.florian935.jpastreamer.domain.Employee;
+import com.florian935.jpastreamer.domain.Employee$;
 import com.florian935.jpastreamer.dto.PetDto;
+import com.florian935.jpastreamer.dto.SimpleEmployeeDto;
 import com.florian935.jpastreamer.dto.SimpleLanguageDto;
 import com.florian935.jpastreamer.repository.EmployeeRepository;
 import com.florian935.jpastreamer.service.EmployeeService;
 import com.speedment.jpastreamer.application.JPAStreamer;
-import lombok.*;
+import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.speedment.jpastreamer.streamconfiguration.StreamConfiguration.of;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toMap;
