@@ -31,4 +31,8 @@ public interface EmployeeService extends CrudService<Employee, Integer> {
     Map<SimpleEmployeeDto, List<PetDto>> getPetsOfEmployees();
 
     Map<SimpleEmployeeDto, List<SimpleLanguageDto>> getLanguagesOfEmployees();
+
+    List<String> getDistinctEmployeeName();
+
+    long count();
 }

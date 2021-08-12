@@ -16,6 +16,7 @@ import java.util.Map;
 import static lombok.AccessLevel.PRIVATE;
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.TEXT_PLAIN_VALUE;
 
 @RestController
 @RequestMapping("/api/v1.0/employees")
@@ -149,5 +150,19 @@ public class EmployeeController {
     Map<SimpleEmployeeDto, List<SimpleLanguageDto>> getLanguagesOfEmployees() {
 
         return employeeService.getLanguagesOfEmployees();
+    }
+
+    @GetMapping(path = "distinct-name", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(OK)
+    List<String> getDistinctEmployeeName() {
+
+        return employeeService.getDistinctEmployeeName();
+    }
+
+    @GetMapping(path = "count")
+    @ResponseStatus(OK)
+    long count() {
+
+        return employeeService.count();
     }
 }

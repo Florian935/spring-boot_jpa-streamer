@@ -193,4 +193,23 @@ public class EmployeeServiceImpl implements EmployeeService {
                         )
                 );
     }
+
+    @Override
+    public List<String> getDistinctEmployeeName() {
+
+        return jpaStreamer.stream(Employee.class)
+                .toList()
+                .stream()
+                .map(Employee$.name)
+                .distinct()
+                .toList();
+    }
+
+    @Override
+    public long count() {
+
+        return jpaStreamer.stream(Employee.class)
+                .toList()
+                .size();
+    }
 }
