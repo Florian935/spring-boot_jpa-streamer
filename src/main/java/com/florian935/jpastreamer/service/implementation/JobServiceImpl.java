@@ -1,5 +1,6 @@
 package com.florian935.jpastreamer.service.implementation;
 
+import com.florian935.jpastreamer.domain.Employee;
 import com.florian935.jpastreamer.domain.Job;
 import com.florian935.jpastreamer.dto.JobDto;
 import com.florian935.jpastreamer.repository.JobRepository;
@@ -18,7 +19,6 @@ import static lombok.AccessLevel.PRIVATE;
 @FieldDefaults(level = PRIVATE, makeFinal = true)
 public class JobServiceImpl implements JobService {
 
-    JobRepository jobRepository;
     JPAStreamer jpaStreamer;
 
     @Override
