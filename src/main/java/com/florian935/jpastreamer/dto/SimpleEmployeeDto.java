@@ -14,12 +14,12 @@ import static lombok.AccessLevel.PRIVATE;
 @AllArgsConstructor
 @FieldDefaults(level = PRIVATE)
 @Builder
-public class EmployeeDto {
+public class SimpleEmployeeDto {
 
     Integer employeeId;
     String name;
 
-    public EmployeeDto(Employee employee) {
+    public SimpleEmployeeDto(Employee employee) {
         this.employeeId = employee.getEmployeeId();
         this.name = employee.getName();
     }

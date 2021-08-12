@@ -1,8 +1,7 @@
 package com.florian935.jpastreamer.controller;
 
 import com.florian935.jpastreamer.domain.Employee;
-import com.florian935.jpastreamer.domain.Language;
-import com.florian935.jpastreamer.dto.EmployeeDto;
+import com.florian935.jpastreamer.dto.SimpleEmployeeDto;
 import com.florian935.jpastreamer.dto.PetDto;
 import com.florian935.jpastreamer.dto.SimpleLanguageDto;
 import com.florian935.jpastreamer.service.EmployeeService;
@@ -140,14 +139,14 @@ public class EmployeeController {
 
     @GetMapping(path = "/pets", produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(OK)
-    Map<EmployeeDto, List<PetDto>> getPetsOfEmployees() {
+    Map<SimpleEmployeeDto, List<PetDto>> getPetsOfEmployees() {
 
         return employeeService.getPetsOfEmployees();
     }
 
     @GetMapping(path = "/languages", produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(OK)
-    Map<EmployeeDto, List<SimpleLanguageDto>> getLanguagesOfEmployees() {
+    Map<SimpleEmployeeDto, List<SimpleLanguageDto>> getLanguagesOfEmployees() {
 
         return employeeService.getLanguagesOfEmployees();
     }

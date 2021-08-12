@@ -1,7 +1,6 @@
 package com.florian935.jpastreamer.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -51,4 +50,11 @@ public class Employee {
     )
     @JsonIgnoreProperties("employees")
     List<Language> languages = new ArrayList<>();
+
+    @Column(name = "address_id")
+    Integer addressId;
+
+    @OneToOne
+    @JoinColumn(name = "address_id", insertable = false, updatable = false)
+    Address address;
 }

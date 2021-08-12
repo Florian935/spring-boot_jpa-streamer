@@ -1,8 +1,7 @@
 package com.florian935.jpastreamer.service;
 
 import com.florian935.jpastreamer.domain.Employee;
-import com.florian935.jpastreamer.domain.Language;
-import com.florian935.jpastreamer.dto.EmployeeDto;
+import com.florian935.jpastreamer.dto.SimpleEmployeeDto;
 import com.florian935.jpastreamer.dto.PetDto;
 import com.florian935.jpastreamer.dto.SimpleLanguageDto;
 
@@ -29,7 +28,7 @@ public interface EmployeeService extends CrudService<Employee, Integer> {
 
     List<Employee> getEmployeesSortedByNameThenSalary();
 
-    Map<EmployeeDto, List<PetDto>> getPetsOfEmployees();
+    Map<SimpleEmployeeDto, List<PetDto>> getPetsOfEmployees();
 
-    Map<EmployeeDto, List<SimpleLanguageDto>> getLanguagesOfEmployees();
+    Map<SimpleEmployeeDto, List<SimpleLanguageDto>> getLanguagesOfEmployees();
 }

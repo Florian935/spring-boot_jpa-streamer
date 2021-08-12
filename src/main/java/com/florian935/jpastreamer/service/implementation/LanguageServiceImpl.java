@@ -1,8 +1,10 @@
 package com.florian935.jpastreamer.service.implementation;
 
 import com.florian935.jpastreamer.domain.Language;
-import com.florian935.jpastreamer.dto.EmployeeDto;
+import com.florian935.jpastreamer.domain.Language$;
 import com.florian935.jpastreamer.dto.LanguageDto;
+import com.florian935.jpastreamer.dto.SimpleEmployeeDto;
+import com.florian935.jpastreamer.dto.SimpleLanguageDto;
 import com.florian935.jpastreamer.repository.LanguageRepository;
 import com.florian935.jpastreamer.service.LanguageService;
 import com.speedment.jpastreamer.application.JPAStreamer;
@@ -11,7 +13,11 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+import static com.speedment.jpastreamer.streamconfiguration.StreamConfiguration.of;
+import static java.util.stream.Collectors.toMap;
 import static lombok.AccessLevel.PRIVATE;
 
 @Service
@@ -54,5 +60,20 @@ public class LanguageServiceImpl implements LanguageService {
     @Override
     public Language updateOne(Integer integer, Language language) {
         return null;
+    }
+
+    @Override
+    public Map<SimpleLanguageDto, List<SimpleEmployeeDto>> getEmployeesPerLanguages() {
+
+        return jpaStreamer.stream(of(Language.class).joining(Language$.employees))
+                .collect(
+                        toMap(
+                                SimpleLanguageDto::new,
+                                language -> language.getEmployees()
+                                        .stream()
+                                        .map(SimpleEmployeeDto::new)
+                                        .toList()
+                        )
+                );
     }
 }

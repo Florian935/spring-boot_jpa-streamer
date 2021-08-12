@@ -21,7 +21,7 @@ public class LanguageDto {
 
     Integer languageId;
     String name;
-    List<EmployeeDto> employees;
+    List<SimpleEmployeeDto> employees;
 
     public LanguageDto(Language language) {
 
@@ -30,11 +30,11 @@ public class LanguageDto {
         this.employees = fromEmployeeToEmployeeDto(language.getEmployees());
     }
 
-    private List<EmployeeDto> fromEmployeeToEmployeeDto(List<Employee> employees) {
+    private List<SimpleEmployeeDto> fromEmployeeToEmployeeDto(List<Employee> employees) {
 
         return employees
                 .stream()
-                .map(EmployeeDto::new)
+                .map(SimpleEmployeeDto::new)
                 .toList();
     }
 }

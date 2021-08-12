@@ -1,14 +1,12 @@
 package com.florian935.jpastreamer.service.implementation;
 
 import com.florian935.jpastreamer.domain.*;
-import com.florian935.jpastreamer.dto.EmployeeDto;
+import com.florian935.jpastreamer.dto.SimpleEmployeeDto;
 import com.florian935.jpastreamer.dto.PetDto;
 import com.florian935.jpastreamer.dto.SimpleLanguageDto;
 import com.florian935.jpastreamer.repository.EmployeeRepository;
-import com.florian935.jpastreamer.service.CrudService;
 import com.florian935.jpastreamer.service.EmployeeService;
 import com.speedment.jpastreamer.application.JPAStreamer;
-import com.speedment.jpastreamer.streamconfiguration.StreamConfiguration;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 
 import static com.speedment.jpastreamer.streamconfiguration.StreamConfiguration.of;
 import static java.util.Comparator.comparing;
@@ -168,13 +165,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Map<EmployeeDto, List<PetDto>> getPetsOfEmployees() {
+    public Map<SimpleEmployeeDto, List<PetDto>> getPetsOfEmployees() {
 
         return jpaStreamer
                 .stream(of(Employee.class).joining(Employee$.pets))
                 .collect(
                         toMap(
-                                EmployeeDto::new,
+                                SimpleEmployeeDto::new,
                                 employee -> employee.getPets()
                                         .stream()
                                         .map(PetDto::new)
@@ -184,13 +181,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Map<EmployeeDto, List<SimpleLanguageDto>> getLanguagesOfEmployees() {
+    public Map<SimpleEmployeeDto, List<SimpleLanguageDto>> getLanguagesOfEmployees() {
 
         return jpaStreamer
                 .stream(of(Employee.class).joining(Employee$.languages))
                 .collect(
                         toMap(
-                                EmployeeDto::new,
+                                SimpleEmployeeDto::new,
                                 employee -> employee
                                         .getLanguages()
                                         .stream()

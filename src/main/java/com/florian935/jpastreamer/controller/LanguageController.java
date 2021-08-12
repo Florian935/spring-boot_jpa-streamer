@@ -1,6 +1,8 @@
 package com.florian935.jpastreamer.controller;
 
 import com.florian935.jpastreamer.dto.LanguageDto;
+import com.florian935.jpastreamer.dto.SimpleEmployeeDto;
+import com.florian935.jpastreamer.dto.SimpleLanguageDto;
 import com.florian935.jpastreamer.service.LanguageService;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 import static lombok.AccessLevel.PRIVATE;
 import static org.springframework.http.HttpStatus.OK;
@@ -28,5 +31,12 @@ public class LanguageController {
     List<LanguageDto> getAllLanguages() {
 
         return languageService.getAll();
+    }
+
+    @GetMapping(path = "employees", produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(OK)
+    Map<SimpleLanguageDto, List<SimpleEmployeeDto>> getEmployeesPerLanguages() {
+
+        return languageService.getEmployeesPerLanguages();
     }
 }
