@@ -33,12 +33,21 @@ public class Employee {
     String name;
 
     @Column(name = "department")
-    private String department;
+    String department;
 
     @Column(name = "salary")
-    private double salary;
+    double salary;
 
     @OneToMany(targetEntity = Pet.class, mappedBy = "employee")
     @JsonIgnoreProperties("employee")
     List<Pet> pets = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "employee_language",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "language_id")
+    )
+    @JsonIgnoreProperties("employees")
+    List<Language> languages = new ArrayList<>();
 }
