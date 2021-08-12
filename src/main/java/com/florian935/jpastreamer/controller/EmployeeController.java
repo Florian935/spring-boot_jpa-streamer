@@ -3,6 +3,7 @@ package com.florian935.jpastreamer.controller;
 import com.florian935.jpastreamer.domain.Employee;
 import com.florian935.jpastreamer.domain.Pet;
 import com.florian935.jpastreamer.dto.EmployeeDto;
+import com.florian935.jpastreamer.dto.PetDto;
 import com.florian935.jpastreamer.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -28,21 +29,21 @@ public class EmployeeController {
     @ResponseStatus(OK)
     List<Employee> getAllEmployees() {
 
-        return employeeService.getAllEmployees();
+        return employeeService.findAll();
     }
 
     @GetMapping(path = "/{id}", produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(OK)
     Employee getEmployeeById(@PathVariable Integer id) {
 
-        return employeeService.getEmployeeById(id);
+        return employeeService.findById(id);
     }
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(CREATED)
     Employee saveEmployee(@RequestBody Employee employee) {
 
-        return employeeService.saveEmployee(employee);
+        return employeeService.saveOne(employee);
     }
 
     @PutMapping(
@@ -52,7 +53,7 @@ public class EmployeeController {
     @ResponseStatus(CREATED)
     Employee updateEmployee(@PathVariable Integer id, @RequestBody Employee employee) {
 
-        return employeeService.updateEmployee(id, employee);
+        return employeeService.updateOne(id, employee);
     }
 
     @DeleteMapping("/{id}")
@@ -136,16 +137,9 @@ public class EmployeeController {
         return employeeService.getEmployeesSortedByNameThenSalary();
     }
 
-    @GetMapping(path = "group-by-pets", produces = APPLICATION_JSON_VALUE)
-    @ResponseStatus(OK)
-    Map<Employee, List<Pet>> getPetsGroupByDepartment() {
-
-        return employeeService.getPetsGroupByEmployee();
-    }
-
     @GetMapping(path = "/name/group-by-pets", produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(OK)
-    Map<EmployeeDto, List<Pet>> getPetsGroupByEmployeeIdAndName() {
+    Map<EmployeeDto, List<PetDto>> getPetsGroupByEmployeeIdAndName() {
 
         return employeeService.getPetsGroupByEmployeeIdAndName();
     }

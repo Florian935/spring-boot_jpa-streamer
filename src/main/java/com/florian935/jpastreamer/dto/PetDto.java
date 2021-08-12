@@ -1,6 +1,6 @@
 package com.florian935.jpastreamer.dto;
 
-import com.florian935.jpastreamer.domain.Employee;
+import com.florian935.jpastreamer.domain.Pet;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,13 +12,13 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = PRIVATE)
-public class EmployeeDto {
+public class PetDto {
 
-    Integer employeeId;
+    Integer petId;
     String name;
 
-    public EmployeeDto(Employee employee) {
-        this.employeeId = employee.getEmployeeId();
-        this.name = employee.getName();
+    public PetDto(Pet pet) {
+        this.petId = pet.getPetId();
+        this.name = pet.getName();
     }
 }

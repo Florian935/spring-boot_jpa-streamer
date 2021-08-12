@@ -1,5 +1,7 @@
 package com.florian935.jpastreamer.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,8 +12,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PRIVATE;
 
@@ -38,11 +38,7 @@ public class Employee {
     @Column(name = "salary")
     private double salary;
 
-    @OneToMany(
-            cascade = ALL,
-            orphanRemoval = true,
-            fetch = EAGER
-    )
-    @JoinColumn(name = "employee_id")
+    @OneToMany(targetEntity = Pet.class, mappedBy = "employee")
+    @JsonIgnoreProperties("employee")
     List<Pet> pets = new ArrayList<>();
 }

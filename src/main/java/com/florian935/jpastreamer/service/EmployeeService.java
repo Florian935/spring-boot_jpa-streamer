@@ -1,24 +1,14 @@
 package com.florian935.jpastreamer.service;
 
 import com.florian935.jpastreamer.domain.Employee;
-import com.florian935.jpastreamer.domain.Job;
 import com.florian935.jpastreamer.domain.Pet;
 import com.florian935.jpastreamer.dto.EmployeeDto;
+import com.florian935.jpastreamer.dto.PetDto;
 
 import java.util.List;
 import java.util.Map;
 
-public interface EmployeeService {
-
-    List<Employee> getAllEmployees();
-
-    Employee getEmployeeById(Integer id);
-
-    Employee saveEmployee(Employee employee);
-
-    Employee updateEmployee(Integer id, Employee employee);
-
-    void deleteById(Integer id);
+public interface EmployeeService extends CrudService<Employee, Integer> {
 
     List<Employee> getAllEmployeesByName(String name);
 
@@ -38,7 +28,5 @@ public interface EmployeeService {
 
     List<Employee> getEmployeesSortedByNameThenSalary();
 
-    Map<Employee, List<Pet>> getPetsGroupByEmployee();
-
-    Map<EmployeeDto, List<Pet>> getPetsGroupByEmployeeIdAndName();
+    Map<EmployeeDto, List<PetDto>> getPetsGroupByEmployeeIdAndName();
 }

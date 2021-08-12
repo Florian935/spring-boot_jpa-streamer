@@ -1,11 +1,14 @@
-package com.florian935.jpastreamer.service;
+package com.florian935.jpastreamer.service.implementation;
 
 import com.florian935.jpastreamer.domain.Employee;
 import com.florian935.jpastreamer.domain.Employee$;
 import com.florian935.jpastreamer.domain.Job;
 import com.florian935.jpastreamer.domain.Pet;
 import com.florian935.jpastreamer.dto.EmployeeDto;
+import com.florian935.jpastreamer.dto.PetDto;
 import com.florian935.jpastreamer.repository.EmployeeRepository;
+import com.florian935.jpastreamer.service.CrudService;
+import com.florian935.jpastreamer.service.EmployeeService;
 import com.speedment.jpastreamer.application.JPAStreamer;
 import com.speedment.jpastreamer.streamconfiguration.StreamConfiguration;
 import lombok.*;
@@ -32,14 +35,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     JPAStreamer jpaStreamer;
 
     @Override
-    public List<Employee> getAllEmployees() {
+    public List<Employee> findAll() {
 
         return jpaStreamer.stream(Employee.class).toList();
     }
 
     @Override
     @SneakyThrows
-    public Employee getEmployeeById(Integer id) {
+    public Employee findById(Integer id) {
 
         if (employeeNotExist(id)) {
             throw new Exception("This employee doesn't exist !");
@@ -56,14 +59,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee saveEmployee(Employee employee) {
+    public Employee saveOne(Employee employee) {
 
         return save(employee);
     }
 
     @Override
     @SneakyThrows
-    public Employee updateEmployee(Integer id, Employee employee) {
+    public Employee updateOne(Integer id, Employee employee) {
 
         if (employeeNotExist(id)) {
             throw new Exception("This employee doesn't exist !");
@@ -167,22 +170,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Map<Employee, List<Pet>> getPetsGroupByEmployee() {
+    public Map<EmployeeDto, List<PetDto>> getPetsGroupByEmployeeIdAndName() {
 
         return jpaStreamer
                 .stream(of(Employee.class).joining(Employee$.pets))
                 .collect(
-                        toMap(Function.identity(), Employee::getPets)
-                );
-    }
-
-    @Override
-    public Map<EmployeeDto, List<Pet>> getPetsGroupByEmployeeIdAndName() {
-
-        return jpaStreamer
-                .stream(of(Employee.class).joining(Employee$.pets))
-                .collect(
-                        toMap(EmployeeDto::new, Employee::getPets)
+                        toMap(
+                                EmployeeDto::new,
+                                employee -> employee.getPets()
+                                        .stream()
+                                        .map(PetDto::new)
+                                        .toList())
                 );
     }
 }

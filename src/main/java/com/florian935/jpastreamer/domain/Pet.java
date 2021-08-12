@@ -1,5 +1,7 @@
 package com.florian935.jpastreamer.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,4 +29,12 @@ public class Pet {
 
     @Column(name = "name")
     String name;
+
+    @Column(name = "employee_id")
+    Integer employeeId;
+
+    @ManyToOne(targetEntity = Employee.class)
+    @JoinColumn(name = "employee_id", insertable = false, updatable = false, nullable = false)
+    @JsonIgnoreProperties("pets")
+    Employee employee;
 }
