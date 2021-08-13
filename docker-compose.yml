@@ -3,7 +3,7 @@ version: '3.8'
 # Define services
 services:
 
-  # Database Service (Mysql)
+  # Database Service (MySQL)
   database:
     image: mysql:8.0
     ports:
